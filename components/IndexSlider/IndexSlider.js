@@ -12,7 +12,6 @@ function extractYoutubeId(url) {
   const match = url.match(regex);
   return match ? match[1] : null;
 }
-
 const RenderBanner = ({ banner }) => {
   switch (banner.type) {
     case "image": {
@@ -206,7 +205,7 @@ const IndexSlider = ({ banners }) => {
                     target={banner?.target ?? "_self"}
                     className="absolute z-[49] top-0 left-0 w-full h-full bg-black transition-all duration-500 bg-opacity-20"
                   >
-                    <div className="absolute flex flex-col items-center md:items-start justify-center md:justify-start max-sm:gap-[20px] gap-[10px] max-sm:top-[50%] top-[48%] text-center max-md:mx-7 md:left-[8%] transform -translate-y-1/2">
+                    <div className="absolute flex flex-col items-center md:items-start justify-center md:justify-start max-sm:gap-[10px] gap-[10px] max-sm:top-[60%] top-[48%] text-center max-md:mx-7 md:left-[8%] transform -translate-y-1/2">
                       {banner?.title && (
                         <h1 className="text-white max-sm:text-base text-xl font-normal">
                           {banner?.title}
@@ -223,7 +222,7 @@ const IndexSlider = ({ banners }) => {
                         </p>
                       )}
                       {banner?.button && (
-                        <button className="bg-transparent  hover:bg-white hover:text-black transition-all duration-300  text-white text-sm font-bold uppercase py-4 px-12 max-sm:px-2 max-sm:py-2 max-sm:flex max-sm:items-center max-sm:justify-center border border-white max-sm:w-[250px] mt-2">
+                        <button className="bg-white/10 hover:bg-white/20 text-white hover:text-white transition-all duration-300 text-sm font-bold uppercase py-4 px-12 max-sm:px-2 max-sm:py-2 max-sm:flex max-sm:items-center max-sm:justify-center border border-white/30 max-sm:w-[250px] mt-2 backdrop-blur-lg  shadow-md">
                           {banner?.button}
                         </button>
                       )}
