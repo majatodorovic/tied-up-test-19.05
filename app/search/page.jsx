@@ -12,6 +12,6 @@ const Search = () => {
 export default Search;
 
 export const metadata = {
-  title: "Pretraga | Fashion Template",
-  description: "Pretraga | Fashion Template",
+  title: "Pretraga | Tied Up",
+  description: "Pretraga | Tied Up",
 };

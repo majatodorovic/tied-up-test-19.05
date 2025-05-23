@@ -6,11 +6,13 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { headers } from "next/headers";
 import { getRobots, handleCategoryRobots } from "@/_functions";
 
-const getBodyForHandleData = () => {
+const getBodyForHandleData = (searchParams = {}) => {
   const headersList = headers();
   const protocol = headersList.get("x-forwarded-proto") || "http";
   const host = headersList.get("host");
   let pathname = headersList.get("x-pathname") || "/";
+
+  const search = new URLSearchParams(searchParams).toString();
 
   if (pathname.match(/\.(css|js|map|mjs|json)$/)) {
     return null;
@@ -23,9 +25,11 @@ const getBodyForHandleData = () => {
     if (pathname.startsWith("/")) {
       pathname = pathname.slice(1);
     }
-    fullUrl = pathname;
+    fullUrl = search ? `${pathname}?${search}` : pathname;
   } else {
-    fullUrl = `${protocol}://${host}${pathname}`;
+    fullUrl = search
+      ? `${protocol}://${host}${pathname}?${search}`
+      : `${protocol}://${host}${pathname}`;
   }
 
   return { absolute_link: fullUrl };
@@ -69,12 +73,13 @@ const defaultMetadata = {
 };
 
 export async function generateMetadata({
+  searchParams,
   searchParams: { filteri, sort, viewed, strana },
 }) {
   const headersList = headers();
   let canonical = headersList?.get("x-pathname");
 
-  const fullUrl = getBodyForHandleData();
+  const fullUrl = getBodyForHandleData(searchParams);
 
   if (!fullUrl) {
     return null;
@@ -181,7 +186,7 @@ export async function generateMetadata({
 }
 
 const CategoryProduct = async ({ params, searchParams }) => {
-  const fullUrl = getBodyForHandleData();
+  const fullUrl = getBodyForHandleData(searchParams);
 
   if (!fullUrl) {
     return null;
