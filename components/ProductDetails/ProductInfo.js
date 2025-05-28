@@ -40,12 +40,12 @@ const ProductInfo = ({
   setProizvod,
   canonical,
   id,
-  gallery
+  gallery,
 }) => {
   const [productVariant, setProductVariant] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState(null);
   const [tempError, setTempError] = useState(null);
-  const [isAddable,setIsAddable] = useState(false);
+  const [isAddable, setIsAddable] = useState(false);
 
   useEffect(() => {
     if (window.scrollY > 0) {
@@ -85,11 +85,11 @@ const ProductInfo = ({
     }
   }, [newURL]);
 
-  useEffect(() =>{
-    if(isAddable) {
+  useEffect(() => {
+    if (isAddable) {
       setTempError(null);
     }
-  },[isAddable])
+  }, [isAddable]);
 
   //azuriramo varijantu
   const updateProductVariant = (variant) => {
@@ -109,7 +109,7 @@ const ProductInfo = ({
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedProizvod, setSelectedProizvod] = useState(null);
-  const [selectedVelicina,setSelectedVelicina] = useState(null);
+  const [selectedVelicina, setSelectedVelicina] = useState(null);
 
   useEffect(() => {
     if (selectedColor !== null) {
@@ -118,7 +118,6 @@ const ProductInfo = ({
   }, [selectedColor]);
 
   useEffect(() => {
-
     if (selectedProizvod !== null) {
       setProizvod(selectedProizvod);
     }
@@ -320,7 +319,7 @@ const ProductInfo = ({
     }
   }, [color]);
 
-  const product_schema = generateProductSchema(product,gallery, canonical);
+  const product_schema = generateProductSchema(product, gallery, canonical);
 
   const handleSavings = () => {
     switch (true) {
@@ -414,7 +413,10 @@ const ProductInfo = ({
               {product?.data?.item?.price?.discount?.active &&
                 (productVariant?.id
                   ? productVariant?.inventory?.inventory_defined
-                  : product?.data?.item?.inventory?.inventory_defined) && (
+                  : product?.data?.item?.inventory?.inventory_defined) &&
+                !product?.data?.item?.categories?.some(
+                  (cat) => cat.slug === "outlet"
+                ) && (
                   <>
                     <div className=" mb-[1.2rem]">
                       <span className="text-[#215352] text-[16px] font-semibold">
