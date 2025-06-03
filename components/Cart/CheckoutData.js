@@ -209,6 +209,42 @@ export const CheckoutData = ({
   return (
     <div className={`mt-5 grid grid-cols-5 gap-[3.75rem]`}>
       <div className={`col-span-5 flex flex-col lg:col-span-3`}>
+        <div className="lg:hidden">
+          {(items ?? [])?.map(
+            ({
+              product: {
+                basic_data: { id_product, name, sku },
+                price,
+                inventory,
+                image,
+                slug_path,
+              },
+              cart: { quantity, cart_item_id },
+            }) => (
+              <CheckoutItems
+                key={id_product}
+                id={id_product}
+                image={image}
+                sku={sku}
+                inventory={inventory}
+                slug_path={slug_path}
+                refreshCart={refreshCart}
+                name={name}
+                price={price}
+                isClosed={isClosed}
+                refreshSummary={refreshSummary}
+                quantity={quantity}
+                cart_item_id={cart_item_id}
+              />
+            )
+          )}
+          <div
+            className={`flex items-center justify-between col-span-5 bg-white p-1 max-xl:row-start-1`}
+          >
+            <h2 className="text-xl font-bold ">Vaši podaci</h2>
+          </div>
+        </div>
+
         {billing_addresses?.length > 1 && (
           <SelectInput
             className={`!w-fit`}
@@ -294,36 +330,38 @@ export const CheckoutData = ({
 
       <div className={`col-span-5 flex flex-col gap-3 lg:col-span-2`}>
         <div
-          className={`customScroll mb-16 flex max-h-[400px] flex-col gap-5 overflow-y-auto sm:mb-10`}
+          className={`customScroll mb-[-50px] lg:mb-10  flex max-h-[200px] lg:max-h-[400px] flex-col gap-5 overflow-y-auto`}
         >
-          {(items ?? [])?.map(
-            ({
-              product: {
-                basic_data: { id_product, name, sku },
-                price,
-                inventory,
-                image,
-                slug_path,
-              },
-              cart: { quantity, cart_item_id },
-            }) => (
-              <CheckoutItems
-                key={id_product}
-                id={id_product}
-                image={image}
-                sku={sku}
-                inventory={inventory}
-                slug_path={slug_path}
-                refreshCart={refreshCart}
-                name={name}
-                price={price}
-                isClosed={isClosed}
-                refreshSummary={refreshSummary}
-                quantity={quantity}
-                cart_item_id={cart_item_id}
-              />
-            )
-          )}
+          <div className="hidden lg:block">
+            {(items ?? [])?.map(
+              ({
+                product: {
+                  basic_data: { id_product, name, sku },
+                  price,
+                  inventory,
+                  image,
+                  slug_path,
+                },
+                cart: { quantity, cart_item_id },
+              }) => (
+                <CheckoutItems
+                  key={id_product}
+                  id={id_product}
+                  image={image}
+                  sku={sku}
+                  inventory={inventory}
+                  slug_path={slug_path}
+                  refreshCart={refreshCart}
+                  name={name}
+                  price={price}
+                  isClosed={isClosed}
+                  refreshSummary={refreshSummary}
+                  quantity={quantity}
+                  cart_item_id={cart_item_id}
+                />
+              )
+            )}
+          </div>
         </div>
         <PromoCode />
         <h2 className="text-xl font-bold ">Vrednost Vaše korpe</h2>
