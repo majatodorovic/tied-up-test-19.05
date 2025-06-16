@@ -34,8 +34,9 @@ export const TemplateOne = ({
           <div className="grid grid-cols-5 gap-y-3 gap-x-3 max-xl:mx-auto max-xl:w-[95%] xl:mx-[5rem] ">
             <div className="col-span-5 bg-white p-1 max-xl:row-start-1">
               <div className={`flex items-center justify-between`}>
-              <h2 className="hidden sm:block text-xl font-bold">Vaši podaci</h2>
-
+                <h2 className="hidden lg:block text-xl font-bold">
+                  Vaši podaci
+                </h2>
               </div>
               {children}
             </div>

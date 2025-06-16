@@ -209,7 +209,7 @@ export const CheckoutData = ({
   return (
     <div className={`mt-5 grid grid-cols-5 gap-[3.75rem]`}>
       <div className={`col-span-5 flex flex-col lg:col-span-3`}>
-        <div className="lg:hidden">
+        <div className="lg:hidden sm:flex sm:flex-col gap-5 ">
           {(items ?? [])?.map(
             ({
               product: {
@@ -332,7 +332,7 @@ export const CheckoutData = ({
         <div
           className={`customScroll mb-[-50px] lg:mb-10  flex max-h-[200px] lg:max-h-[400px] flex-col gap-5 overflow-y-auto`}
         >
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex lg:flex-col gap-5 ">
             {(items ?? [])?.map(
               ({
                 product: {
